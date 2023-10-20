@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report_mpivot_rule">
+    <sys_report_mpivot_rule action="INSERT_OR_UPDATE">
+        <bg_color>background-color:</bg_color>
+        <bg_color_id/>
+        <color>background-color:#008000</color>
+        <color_id display_value="Green">65b302aea9fe3dba00a530d65ecc2106</color_id>
+        <operator>=</operator>
+        <order/>
+        <report_id display_value="Potentially misconfigured ACLs">b10f3738974e71103c2d3f56f053af5f</report_id>
+        <sys_class_name>sys_report_mpivot_rule</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 20:52:46</sys_created_on>
+        <sys_id>063f7b78974e71103c2d3f56f053af06</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>=</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_report_mpivot_rule_063f7b78974e71103c2d3f56f053af06</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 20:52:46</sys_updated_on>
+        <value1>0</value1>
+        <value2/>
+    </sys_report_mpivot_rule>
+</record_update>

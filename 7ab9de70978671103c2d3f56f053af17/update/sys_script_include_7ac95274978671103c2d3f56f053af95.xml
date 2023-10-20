@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_376096_dla.DLAUtil</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>DLAUtil</name>
+        <script><![CDATA[/* global Class, GlideRecord, global, GlideScopedEvaluator, gs */
+/* eslint no-undef: "error" */
+var DLAUtil = Class.create();
+DLAUtil.prototype = {
+    initialize: function() {
+		
+    },
+	
+	getAffectedWidgets: function () {
+		const catItemWidgetSysID = '3c29786e87133200e0ef0cf888cb0bdf';
+		const affectedWidgets = [];
+		const widgetGr = new GlideRecord('sp_widget');
+		widgetGr.addQuery('public', true);
+		widgetGr.addQuery('script', 'CONTAINS', 'GlideRecord')
+			.addOrCondition('script', 'CONTAINS', 'GlideRecordSecure');
+		widgetGr.addQuery('sys_id', '!=', catItemWidgetSysID); // false positive
+		widgetGr.orderByDesc('sys_created_on');
+		widgetGr.query();
+		
+		// regex to lookup for a dynamic GlideRecordQuery
+		const dynGrRegex = /(?:var|let|const)\s*(\S+)\s*=\s*new\s*GlideRecord(Secure)?\(\s*[^'"].*\)/g;
+		while (widgetGr.next()) {
+			const script = widgetGr.script.toString();
+			let result;
+			while (result = dynGrRegex.exec(script)) {
+				// Note: This regex doesn't take into account that the variable might be
+				// reassigned, or a variable with the same name is used on other parts
+				// of the script. This might lead to false positives!
+				const loopRegex = new RegExp("while\\s*\\(\\s*" + result[1] + "\\s*.next\\(\\s*\\)\\s*\\)");
+				if (script.match(loopRegex)) {
+					affectedWidgets.push({
+						sys_id: widgetGr.getUniqueValue(),
+						name: widgetGr.name.toString(),
+						reason: 'Dynamic GlideRecord Query with Loop'
+					});
+					break;
+				}
+			}
+		}
+		
+		return affectedWidgets;
+	},
+	
+	getAffectedACLs: function () {
+		const aclsWithNoRoles = [];
+		const aclGr = new GlideRecord('sys_security_acl');
+		aclGr.addQuery('type', 'record');
+		// we only want table-level ACLs
+		aclGr.addQuery('name', 'DOES NOT CONTAIN', '.');
+		aclGr.addQuery('name', 'DOES NOT CONTAIN', '*');
+		aclGr.addQuery('operation', 'read');
+		aclGr.addNullQuery('script');
+		aclGr.orderByDesc('sys_created_on');
+		aclGr.query();
+		while (aclGr.next()) {
+			const aclRoleGr = new GlideRecord('sys_security_acl_role');
+			aclRoleGr.addQuery('sys_security_acl', aclGr.sys_id);
+			aclRoleGr.setLimit(1);
+			aclRoleGr.query();
+			if (!aclRoleGr.hasNext()) {
+				aclsWithNoRoles.push({
+					sys_id: aclGr.getUniqueValue(),
+					table: aclGr.getValue('name'),
+					reason: 'no roles'
+				});
+			}
+		}
+		
+		return aclsWithNoRoles;
+	},
+	
+	getAffectedTables: function () {
+		const affectedTables = {
+			prevented: [], // prevented by widget-simple-list "hasPublicAccess"
+			breached: []
+		};
+		
+		const renderSizeProbability100 = 40000;
+		const renderSizeProbability10 = 9000;
+		const leakProbability = function (renderSize) {
+			const normalizedSize = (renderSize - renderSizeProbability10) / 
+				(renderSizeProbability100 - renderSizeProbability10);
+			
+			return Math.floor(Math.min(0.1 + normalizedSize, 1) * 100);
+		};
+		
+		const scriptGr = new GlideRecord('sys_rte_eb_script_operation');
+		scriptGr.addQuery('sys_id', '9c8bdb7c978a71103c2d3f56f053afef');
+		scriptGr.setLimit(1);
+		scriptGr.query();
+		if (scriptGr.next()) {
+			scriptGr.sys_scope = 'global';
+			scriptGr.script = '(function () {'
+				+ 'var transURLs = [];'
+				+ 'var transGr = new GlideRecord("syslog_transaction");'
+				+ 'transGr.addQuery("sys_created_by", "guest");'
+				+ 'transGr.addQuery("url", "STARTSWITH", "/api/now/sp/widget");'
+				// the Render size (uncompressed chars) is an indication whether actual data has been returned
+				+ 'transGr.addQuery("render_size", ">", ' + renderSizeProbability10 + ');'
+				+ 'transGr.orderByDesc("sys_created_on");'
+				+ 'transGr.query();'
+				+ 'while (transGr.next()) {'
+					+ 'var url = transGr.url.toString();'
+					+ 'if (url.indexOf("/api/now/sp/widget/widget-modal") == 0) { continue; }'
+					+ 'transURLs.push({'
+						+ 'sys_id: transGr.getUniqueValue(),'
+						+ 'url: url,'
+						+ 'size: +transGr.render_size'
+					+ '});'
+				+ '} gs.info(transURLs);'
+				+ 'return transURLs;'
+				+ '})();';
+			
+			// required to query on syslog_transaction which by default is only possible via global scope
+			const transData = new GlideScopedEvaluator().evaluateScript(scriptGr, 'script');
+			const regex = /^[/]?api\/now\/sp\/widget\/(.*?)\?.*(?:t|table)=(.*?)(?:&|$)/;
+			const aclUtil = new global.SNCACLUtil();
+			const widgetSimpleListSysID = '5b255672cb03020000f8d856634c9c28';
+			for (let i = 0; i < transData.length; i++) {
+				const match = transData[i].url.match(regex);
+				if (match) {
+					const widget = match[1];
+					const table = match[2];
+					if (widget == 'widget-simple-list' || widget == widgetSimpleListSysID) {
+						if (!aclUtil.hasPublicAccess(table)) {
+							// if the table is not "public", the simple list widget hasn't returned any results
+							// and as such the current table isn't subjected to a data leak (at least not through this widget)
+							affectedTables.prevented.push({
+								widget: widget,
+								table: table,
+								transaction: transData[i].sys_id,
+								reason: 'protected by "widget-simple-list" hasPublicAccess'
+							});
+							continue;
+						}
+					}
+
+					const breachedProbability = leakProbability(transData[i].size);
+					const tableBreachedIndex = affectedTables.breached.findIndex(x => x.widget == widget && x.table == table);
+					if (tableBreachedIndex != -1) {
+						// we only need the most severe breach
+						if (affectedTables.breached[tableBreachedIndex].prob >= breachedProbability) {
+							continue;
+						} else {
+							affectedTables.breached.splice(tableBreachedIndex, 1);
+						}
+					}
+					
+					affectedTables.breached.push({
+						widget: widget,
+						table: table,
+						transaction: transData[i].sys_id,
+						reason: 'public access possible',
+						prob: breachedProbability
+					});
+				}
+			}
+		} else {
+			gs.error('[DLA] No Script Injection possible!');
+		}
+		
+		return affectedTables;
+	},
+
+    type: 'DLAUtil'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 16:17:18</sys_created_on>
+        <sys_id>7ac95274978671103c2d3f56f053af95</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>DLAUtil</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_script_include_7ac95274978671103c2d3f56f053af95</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 22:14:18</sys_updated_on>
+    </sys_script_include>
+</record_update>

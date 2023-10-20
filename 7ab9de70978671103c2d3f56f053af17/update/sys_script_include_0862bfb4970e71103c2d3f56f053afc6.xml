@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_376096_dla.DLAReportUtil</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>DLAReportUtil</name>
+        <script><![CDATA[var DLAReportUtil = Class.create();
+DLAReportUtil.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    initialize: function () {
+		global.AbstractAjaxProcessor.prototype.initialize.apply(this, arguments);
+		
+		this.util = new x_376096_dla.DLAUtil();
+    },
+	
+	getAffectedWidgets: function () {
+		return this.util.getAffectedWidgets().map(x => x.sys_id);
+	},
+	
+	getAffectedACLs: function () {
+		return this.util.getAffectedACLs().map(x => x.sys_id);
+	},
+
+    type: 'DLAReportUtil'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 19:57:14</sys_created_on>
+        <sys_id>0862bfb4970e71103c2d3f56f053afc6</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>DLAReportUtil</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_script_include_0862bfb4970e71103c2d3f56f053afc6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 20:50:58</sys_updated_on>
+    </sys_script_include>
+</record_update>

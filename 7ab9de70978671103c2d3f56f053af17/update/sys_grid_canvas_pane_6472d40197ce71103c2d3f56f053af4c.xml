@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA Data Leak Analyser - - New Tab 2">a6f327f497ca71103c2d3f56f053afe2</grid_canvas>
+        <height>10</height>
+        <portal_widget display_value="Created 2023-10-20 15:16:38">a072d40197ce71103c2d3f56f053af4b</portal_widget>
+        <posx>0</posx>
+        <posy>10</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 22:16:38</sys_created_on>
+        <sys_id>6472d40197ce71103c2d3f56f053af4c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>a6f327f497ca71103c2d3f56f053afe2</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_6472d40197ce71103c2d3f56f053af4c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 22:16:46</sys_updated_on>
+        <width>12</width>
+    </sys_grid_canvas_pane>
+</record_update>

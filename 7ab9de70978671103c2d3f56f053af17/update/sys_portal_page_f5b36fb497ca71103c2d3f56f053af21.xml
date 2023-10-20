@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2023-10-20 22:31:49">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout/>
+        <order/>
+        <read_roles/>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 18:52:28</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f5b36fb497ca71103c2d3f56f053af21</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>PA Widget Status</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_portal_page_f5b36fb497ca71103c2d3f56f053af21</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 18:54:46</sys_updated_on>
+        <title>PA Widget Status</title>
+        <user/>
+        <view>pa_data_leak_analyser_-_-_new_tab</view>
+        <related_items_node>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Widget Status">f5b36fb497ca71103c2d3f56f053af21</page>
+                <summary>Leaking Service Portal Widget Remediation</summary>
+                <sys_created_by>admin</sys_created_by>
+                <sys_created_on>2023-10-20 20:02:47</sys_created_on>
+                <sys_id>00d33778970e71103c2d3f56f053afff</sys_id>
+                <sys_mod_count>2</sys_mod_count>
+                <sys_updated_by>admin</sys_updated_by>
+                <sys_updated_on>2023-10-20 20:09:36</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2023-10-20 13:02:47">00d33778970e71103c2d3f56f053afff</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 20:02:47</sys_created_on>
+                        <sys_id>00d37778970e71103c2d3f56f053af00</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:02:47</sys_updated_on>
+                        <value>com.glide.cms.RenderBlock</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>type</name>
+                        <portal_section display_value="Created 2023-10-20 13:02:47">00d33778970e71103c2d3f56f053afff</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 20:02:47</sys_created_on>
+                        <sys_id>08d37778970e71103c2d3f56f053af00</sys_id>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:09:36</sys_updated_on>
+                        <value>content_block_static</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2023-10-20 13:02:47">00d33778970e71103c2d3f56f053afff</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 20:02:47</sys_created_on>
+                        <sys_id>84d33778970e71103c2d3f56f053afff</sys_id>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:09:36</sys_updated_on>
+                        <value>f1d3f778970e71103c2d3f56f053af5d</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2023-10-20 13:02:47">00d33778970e71103c2d3f56f053afff</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 20:02:47</sys_created_on>
+                        <sys_id>c0d37778970e71103c2d3f56f053af00</sys_id>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:09:36</sys_updated_on>
+                        <value>Leaking Service Portal Widget Remediation</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone/>
+                <offset/>
+                <page display_value="PA Widget Status">f5b36fb497ca71103c2d3f56f053af21</page>
+                <summary>Leaking Portal Widgets</summary>
+                <sys_created_by>admin</sys_created_by>
+                <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                <sys_id>801927f497ca71103c2d3f56f053aff7</sys_id>
+                <sys_mod_count>2</sys_mod_count>
+                <sys_updated_by>admin</sys_updated_by>
+                <sys_updated_on>2023-10-20 20:01:16</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 2023-10-20 12:15:49">801927f497ca71103c2d3f56f053aff7</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                        <sys_id>0c1927f497ca71103c2d3f56f053aff8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 19:15:49</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 2023-10-20 12:15:49">801927f497ca71103c2d3f56f053aff7</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                        <sys_id>481927f497ca71103c2d3f56f053aff8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 19:15:49</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 2023-10-20 12:15:49">801927f497ca71103c2d3f56f053aff7</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                        <sys_id>841927f497ca71103c2d3f56f053aff8</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 19:15:49</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 2023-10-20 12:15:49">801927f497ca71103c2d3f56f053aff7</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                        <sys_id>881927f497ca71103c2d3f56f053aff7</sys_id>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:01:16</sys_updated_on>
+                        <value>69733f38970e71103c2d3f56f053af33</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 2023-10-20 12:15:49">801927f497ca71103c2d3f56f053aff7</portal_section>
+                        <sys_created_by>admin</sys_created_by>
+                        <sys_created_on>2023-10-20 19:15:49</sys_created_on>
+                        <sys_id>cc1927f497ca71103c2d3f56f053aff8</sys_id>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>admin</sys_updated_by>
+                        <sys_updated_on>2023-10-20 20:01:16</sys_updated_on>
+                        <value>Leaking Portal Widgets</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+        </related_items_node>
+    </sys_portal_page>
+</record_update>

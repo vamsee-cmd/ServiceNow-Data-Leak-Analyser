@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas">
+    <sys_grid_canvas action="INSERT_OR_UPDATE">
+        <legacy_page display_value="PA ACL Status">2ef327f497ca71103c2d3f56f053afe1</legacy_page>
+        <name>PA Data Leak Analyser - - New Tab 2</name>
+        <sys_class_name>sys_grid_canvas</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 18:53:36</sys_created_on>
+        <sys_id>a6f327f497ca71103c2d3f56f053afe2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PA Data Leak Analyser - - New Tab 2</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_grid_canvas_a6f327f497ca71103c2d3f56f053afe2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 18:53:36</sys_updated_on>
+    </sys_grid_canvas>
+</record_update>
