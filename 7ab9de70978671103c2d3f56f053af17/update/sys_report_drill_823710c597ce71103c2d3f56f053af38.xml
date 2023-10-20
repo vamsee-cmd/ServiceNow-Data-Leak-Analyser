@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report">
-    <sys_report action="INSERT_OR_UPDATE">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report_drill">
+    <sys_report_drill action="INSERT_OR_UPDATE">
         <additional_groupby/>
         <aggregate>COUNT</aggregate>
         <aggregation_source>no_override</aggregation_source>
@@ -26,7 +26,7 @@
         <chart_title_x_position>0</chart_title_x_position>
         <chart_title_y_position>0</chart_title_y_position>
         <chart_width>600</chart_width>
-        <color/>
+        <color display_value="Default Color">de699435d7033100b4964ebfae610331</color>
         <color_palette display_value="Default UI14">aa558ab3d7732100fa6c0c12ce610377</color_palette>
         <colors/>
         <column/>
@@ -35,7 +35,7 @@
         <created_by_user display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</created_by_user>
         <custom_chart_size>false</custom_chart_size>
         <custom_chart_title_position>false</custom_chart_title_position>
-        <custom_config>{"transforms":[{"transform":{"transform":"Reference","name":"chart-subjects"}}]}</custom_config>
+        <custom_config/>
         <decimal_precision>2</decimal_precision>
         <description/>
         <direction>minimize</direction>
@@ -46,10 +46,9 @@
         <end_time/>
         <exp_report_attrs>true</exp_report_attrs>
         <field/>
-        <field_list>name,id,data_table,sys_updated_on,sys_package</field_list>
-        <filter table="sp_widget">sys_idINjavascript: new x_376096_dla.DLAReportUtil().getAffectedWidgets()<item endquery="false" field="sys_id" goto="false" newquery="false" operator="IN" or="false" value="javascript: new x_376096_dla.DLAReportUtil().getAffectedWidgets()"/>
-        </filter>
-        <formatting_configuration>{"table":"incident","stringFormattingProperties":{},"durationFormattingProperties":{},"dateFormattingProperties":{},"numberFormattingProperties":{"$COUNT_FIELD$,AGGREGATION":{"decimalPrecision":2,"groupingUsed":true,"roundingMode":"HALF_UP","metricPrefixSymbolUsed":false,"showOriginalNumberInTooltip":true,"addValueInTooltip":true}}}</formatting_configuration>
+        <field_list>name,advanced,sys_scope,sys_updated_on,sys_updated_by</field_list>
+        <filter/>
+        <formatting_configuration>{"table":"incident","stringFormattingProperties":{},"durationFormattingProperties":{},"dateFormattingProperties":{},"numberFormattingProperties":{}}</formatting_configuration>
         <from/>
         <funnel_neck_percent>30</funnel_neck_percent>
         <gauge_autoscale>true</gauge_autoscale>
@@ -77,7 +76,7 @@
         <others>true</others>
         <page_hdrftr/>
         <pivot_expanded>true</pivot_expanded>
-        <report_drilldown display_value="System Administrator: 2023-10-20 15:36:04">11e6988597ce71103c2d3f56f053af4a</report_drilldown>
+        <report_drilldown/>
         <report_source/>
         <roles/>
         <row/>
@@ -85,9 +84,9 @@
         <sc_groupby_variable_id/>
         <sc_stackby_item_id/>
         <sc_stackby_variable_id/>
-        <score_color display_value="Red">65b30395a9fe3dba003277a7b660b5db</score_color>
+        <score_color display_value="Black">65b30218a9fe3dba0120df8611520d97</score_color>
         <series_name_text/>
-        <set_color>null</set_color>
+        <set_color>one_color</set_color>
         <show_chart_border>false</show_chart_border>
         <show_chart_data_label>false</show_chart_data_label>
         <show_chart_title>report</show_chart_title>
@@ -98,30 +97,30 @@
         <show_legend>true</show_legend>
         <show_legend_border>false</show_legend_border>
         <show_marker>false</show_marker>
-        <show_zero>true</show_zero>
+        <show_zero>false</show_zero>
         <source_type>table</source_type>
         <start_time/>
         <style_config/>
         <sumfield/>
-        <sys_class_name>sys_report</sys_class_name>
+        <sys_class_name>sys_report_drill</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2023-10-20 20:01:16</sys_created_on>
-        <sys_id>69733f38970e71103c2d3f56f053af33</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>Leaking Portal Widgets</sys_name>
+        <sys_created_on>2023-10-20 22:37:29</sys_created_on>
+        <sys_id>823710c597ce71103c2d3f56f053af38</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>System Administrator: 2023-10-20 15:37:29</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
-        <sys_update_name>sys_report_69733f38970e71103c2d3f56f053af33</sys_update_name>
+        <sys_update_name>sys_report_drill_823710c597ce71103c2d3f56f053af38</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-20 22:36:04</sys_updated_on>
-        <table>sp_widget</table>
-        <title>Leaking Portal Widgets</title>
+        <sys_updated_on>2023-10-20 22:37:29</sys_updated_on>
+        <table>sys_security_acl</table>
+        <title>System Administrator: 2023-10-20 15:37:29</title>
         <title_horizontal_alignment>center</title_horizontal_alignment>
         <title_vertical_alignment>top</title_vertical_alignment>
         <to/>
         <trend_field/>
-        <type>single_score</type>
+        <type>list</type>
         <upper_limit/>
         <use_color_heatmap>false</use_color_heatmap>
         <use_null_in_trend>false</use_null_in_trend>
@@ -156,5 +155,5 @@
         <y_axis_title_color display_value="Black">65b30218a9fe3dba0120df8611520d97</y_axis_title_color>
         <y_axis_title_size>12</y_axis_title_size>
         <y_axis_to/>
-    </sys_report>
+    </sys_report_drill>
 </record_update>
