@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_static">
+    <content_block_static action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Leak Data Analysis</name>
+        <static_content><![CDATA[<p>To analyse the leaked data, you need to examine each table&#39;s ACLs. Keep in mind that since the extraction attempt, the ACLs have likely been hardened: e.g. either by manual changes or by ServiceNow&#39;s ACL Maintenance Script.<br />See also: Main Dashboard &gt; ACL Status &gt; ACL Hardening (<a href="$pa_dashboard.do?sysparm_dashboard&#61;76836fb497ca71103c2d3f56f053af13&amp;sysparm_tab&#61;e2f3a7f497ca71103c2d3f56f053afbd" target="_blank" rel="nofollow noopener noreferrer">LINK ➚</a>)</p>
+<p>Some known leaks for a OOTB instance configuration:</p>
+<ul><li>If User (sys_user) table has been queried: If the &#39;Explicit Role&#39; Plugin (<a href="https://docs.servicenow.com/en-US/bundle/vancouver-platform-security/page/administer/security/reference/explicit-role-plugin.html" target="_blank" rel="nofollow noopener noreferrer">Docs ➚</a>) has not been activated at the time of the attempt, all records are leaked.</li><li>If Catalog Item (sc_cat_item) table has been queried: All records are leaked</li></ul>
+<p> </p>]]></static_content>
+        <sys_class_name>content_block_static</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-22 15:19:26</sys_created_on>
+        <sys_id>a42101a5978635103c2d3f56f053af65</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Leak Data Analysis</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>content_block_static_a42101a5978635103c2d3f56f053af65</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-22 15:26:07</sys_updated_on>
+    </content_block_static>
+    <sys_translated_text action="delete_multiple" query="documentkey=a42101a5978635103c2d3f56f053af65"/>
+</record_update>

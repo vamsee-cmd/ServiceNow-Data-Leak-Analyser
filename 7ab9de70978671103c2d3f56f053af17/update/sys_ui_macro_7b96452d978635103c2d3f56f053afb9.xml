@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>leak_analysis</name>
+        <scoped_name>x_376096_dla_leak_analysis</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-22 15:21:32</sys_created_on>
+        <sys_id>7b96452d978635103c2d3f56f053afb9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>leak_analysis</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_ui_macro_7b96452d978635103c2d3f56f053afb9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-22 15:21:32</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g2:evaluate>
+		const contentGr = new GlideRecord('content_block_static');
+		contentGr.addQuery('sys_id', 'a42101a5978635103c2d3f56f053af65');
+		contentGr.setLimit(1);
+		contentGr.query();
+		
+		let instructions = '';
+		if (contentGr.next()) {
+			instructions = contentGr.static_content.toString();
+		}
+	</g2:evaluate>
+	<div style="border: 1px solid; padding: 10px;">
+		<g2:no_escape>$[instructions]</g2:no_escape>
+	</div>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

@@ -47,7 +47,8 @@
         <exp_report_attrs>true</exp_report_attrs>
         <field/>
         <field_list>number,short_description,state,widget,sys_updated_on</field_list>
-        <filter/>
+        <filter table="x_376096_dla_widget_result">active=true<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+        </filter>
         <formatting_configuration>{"table":"incident","stringFormattingProperties":{},"durationFormattingProperties":{},"dateFormattingProperties":{},"numberFormattingProperties":{}}</formatting_configuration>
         <from/>
         <funnel_neck_percent>30</funnel_neck_percent>
@@ -106,14 +107,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-21 19:50:38</sys_created_on>
         <sys_id>e39ab45d97c2f1103c2d3f56f053afa2</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Leaking Portal Widgets</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_report_e39ab45d97c2f1103c2d3f56f053afa2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-21 19:50:38</sys_updated_on>
+        <sys_updated_on>2023-10-22 15:09:07</sys_updated_on>
         <table>x_376096_dla_widget_result</table>
         <title>Leaking Portal Widgets</title>
         <title_horizontal_alignment>center</title_horizontal_alignment>

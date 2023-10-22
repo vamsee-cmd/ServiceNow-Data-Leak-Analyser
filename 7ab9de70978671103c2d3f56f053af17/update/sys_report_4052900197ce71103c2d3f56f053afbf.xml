@@ -46,8 +46,9 @@
         <end_time/>
         <exp_report_attrs>true</exp_report_attrs>
         <field/>
-        <field_list>number,short_description,state,table,widget,probability,assigned_to,sys_updated_on</field_list>
-        <filter/>
+        <field_list>number,short_description,state,table,widget,attempt_date,probability,assigned_to,sys_updated_on</field_list>
+        <filter table="x_376096_dla_leak_result">active=true<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+        </filter>
         <formatting_configuration>{"table":"incident","stringFormattingProperties":{},"durationFormattingProperties":{},"dateFormattingProperties":{},"numberFormattingProperties":{}}</formatting_configuration>
         <from/>
         <funnel_neck_percent>30</funnel_neck_percent>
@@ -106,14 +107,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 22:16:02</sys_created_on>
         <sys_id>4052900197ce71103c2d3f56f053afbf</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name>Data Extraction Attempts</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_report_4052900197ce71103c2d3f56f053afbf</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 08:07:53</sys_updated_on>
+        <sys_updated_on>2023-10-22 15:07:40</sys_updated_on>
         <table>x_376096_dla_leak_result</table>
         <title>Data Extraction Attempts</title>
         <title_horizontal_alignment>center</title_horizontal_alignment>

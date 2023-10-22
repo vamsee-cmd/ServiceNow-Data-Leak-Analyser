@@ -8,20 +8,20 @@
         <frame_name/>
         <height>600</height>
         <logged_on>false</logged_on>
-        <name>Data Leak Actions</name>
-        <sizing>fixed</sizing>
+        <name>Leaked Data Actions</name>
+        <sizing>expand</sizing>
         <sys_class_name>content_block_iframe</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-22 07:50:03</sys_created_on>
         <sys_id>353f5f9597cef1103c2d3f56f053aff1</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Data Leak Actions</sys_name>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Leaked Data Actions</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>content_block_iframe_353f5f9597cef1103c2d3f56f053aff1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 07:50:03</sys_updated_on>
+        <sys_updated_on>2023-10-22 08:38:48</sys_updated_on>
         <url>x_376096_dla_analyse_leaks.do</url>
         <width>400</width>
     </content_block_iframe>

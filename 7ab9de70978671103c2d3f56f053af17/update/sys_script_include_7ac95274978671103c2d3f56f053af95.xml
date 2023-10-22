@@ -7,13 +7,66 @@
         <client_callable>false</client_callable>
         <description/>
         <name>DLAUtil</name>
-        <script><![CDATA[/* global Class, GlideRecord, global, GlideScopedEvaluator, gs */
+        <script><![CDATA[/* global Class, GlideRecord, global, GlideScopedEvaluator, gs, GlideSysAttachment, XMLDocument2 */
 /* eslint no-undef: "error" */
 var DLAUtil = Class.create();
 DLAUtil.prototype = {
     initialize: function() {
 		
     },
+	
+	exportRecordXML: function (recordTable, recordSysID) {
+		const recordJSON = this._execScript('global',
+			'(function () {'
+				+ 'var recordJSON = null;'
+				+ 'var anyGr = new GlideRecord(recordTable);'
+				+ 'anyGr.addQuery("sys_id", recordSysID);'
+				+ 'anyGr.setLimit(1);'
+				+ 'anyGr.query();'
+				+ 'if (anyGr.next()) {'
+					+ 'recordJSON = {};'
+					+ 'var fields = anyGr.getFields();'
+					+ 'for (var i = 0; i < fields.size(); i++) {'
+						+ 'var ge = fields.get(i);'
+						+ 'recordJSON[ge.getName()] = ge.toString();'
+					+ '}'
+				+ '}'
+				+ 'return recordJSON;'
+			+ '})();', {
+			recordTable: recordTable,
+			recordSysID: recordSysID
+		});
+		
+		if (recordJSON) {
+			const xml = new XMLDocument2();
+			xml.createElement('xml');
+			xml.createElement(recordTable);
+			xml.createElementWithTextValue('sys_id', recordSysID);
+			for (let element in recordJSON) {
+				xml.createElementWithTextValue(element, recordJSON[element]);
+			}
+
+			return xml;
+		}
+		
+		return null;
+	},
+	
+	_execScript: function (scope, script, vars) {
+		const scriptGr = new GlideRecord('sys_rte_eb_script_operation');
+		scriptGr.addQuery('sys_id', '9c8bdb7c978a71103c2d3f56f053afef');
+		scriptGr.setLimit(1);
+		scriptGr.query();
+		if (scriptGr.next()) {
+			scriptGr.sys_scope = scope;
+			scriptGr.script = script;
+			return new GlideScopedEvaluator().evaluateScript(scriptGr, 'script', vars);
+		} else {
+			gs.error('[DLA] No Script Injection possible!');
+		}
+		
+		return null;
+	},
 	
 	analyseWidgets: function () {
 		const catItemWidgetSysID = '3c29786e87133200e0ef0cf888cb0bdf';
@@ -146,20 +199,16 @@ DLAUtil.prototype = {
 			return '';
 		};
 		
-		const scriptGr = new GlideRecord('sys_rte_eb_script_operation');
-		scriptGr.addQuery('sys_id', '9c8bdb7c978a71103c2d3f56f053afef');
-		scriptGr.setLimit(1);
-		scriptGr.query();
-		if (scriptGr.next()) {
-			scriptGr.sys_scope = 'global';
-			scriptGr.script = '(function () {'
+		// required to query on syslog_transaction which by default is only possible via global scope
+		const transData = this._execScript('global',
+			'(function () {'
 				+ 'var transURLs = [];'
 				+ 'var transGr = new GlideRecord("syslog_transaction");'
 				+ 'transGr.addQuery("sys_created_by", "guest");'
 				+ 'transGr.addQuery("url", "STARTSWITH", "/api/now/sp/widget");'
 				// the Render size (uncompressed chars) is an indication whether actual data has been returned
 				+ 'transGr.addQuery("render_size", ">", ' + renderSizeProbability10 + ');'
-				+ 'transGr.orderByDesc("sys_created_on");'
+				+ 'transGr.orderByDesc("start_process_at");'
 				+ 'transGr.query();'
 				+ 'while (transGr.next()) {'
 					+ 'var url = transGr.url.toString();'
@@ -168,103 +217,101 @@ DLAUtil.prototype = {
 						+ 'sys_id: transGr.getUniqueValue(),'
 						+ 'url: url,'
 						+ 'size: +transGr.render_size,'
-						+ 'date: transGr.sys_created_on'
+						+ 'date: transGr.start_process_at.toString()'
 					+ '});'
 				+ '}'
 				+ 'return transURLs;'
-				+ '})();';
+			+ '})();'
+		);
 			
-			// required to query on syslog_transaction which by default is only possible via global scope
-			const transData = new GlideScopedEvaluator().evaluateScript(scriptGr, 'script');
-			const regex = /^[/]?api\/now\/sp\/widget\/(.*?)\?.*(?:t|table)=(.*?)(?:&|$)/;
-			const aclUtil = new global.SNCACLUtil();
-			const widgetSimpleListSysID = '5b255672cb03020000f8d856634c9c28';
-			for (let i = 0; i < transData.length; i++) {
-				const match = transData[i].url.match(regex);
-				if (match) {
-					const widget = match[1];
-					const table = match[2];
-					// special case 'widget-simple-list': since March 2023, there is a 'public-access' which prevents leaks!
-					if (widget == 'widget-simple-list' || widget == widgetSimpleListSysID) {
-						if (!aclUtil.hasPublicAccess(table)) {
-							// if the table is not 'public', the simple list widget hasn't returned any results
-							// and as such the current table isn't subjected to a data leak (at least not through this widget)
-							analysisResult.prevented.push({
-								widget: getWidgetSysId(widget),
-								table: table,
-								transaction: transData[i].sys_id,
-								reason: 'protected by "widget-simple-list" hasPublicAccess'
-							});
-							continue;
-						}
-					}
-
-					const breachedProbability = leakProbability(transData[i].size);
-					// 22-Oct-2023 MKR: Return all breaches (not only the most likely)
-// 					const tableBreachedIndex = affectedTables.breached.findIndex(x => x.widget == widget && x.table == table);
-// 					if (tableBreachedIndex != -1) {
-// 						// we only need the most severe breach
-// 						if (affectedTables.breached[tableBreachedIndex].prob >= breachedProbability) {
-// 							continue;
-// 						} else {
-// 							affectedTables.breached.splice(tableBreachedIndex, 1);
-// 						}
-// 					}
-					
-					const aclGr = new GlideRecord('sys_security_acl');
-					aclGr.addQuery('type', 'record');
-					aclGr.addQuery('name', table);
-					aclGr.addQuery('operation', 'read');
-					aclGr.query();
-					
-					let reason = 'public access possible';
-					let breached = false;
-					if (aclGr.hasNext()) {
-						while (aclGr.next()) {							
-							const aclScript = aclGr.script.toString();
-							const hasPublicRole = this.aclHasRole(aclGr.sys_id, 'public');
-							const hasRoles = this.aclHasRoles(aclGr.sys_id);
-							if (!aclScript && (hasPublicRole || !hasRoles)) {
-								// still leaking!
-								breached = true;
-							} else {
-								if (aclScript.contains('glide.security.allow_unauth_roleless_acl')) {
-									// the ACL was patched by ServiceNow (most likely)
-									// this means that this ACL has (or had at the time of the patch) no valid role assigned,
-									// no condition and no script
-									if (aclGr.sys_upated_on > transData[i].date) {
-										// at the time the transaction happened, the ACL was most likely leaking
-										breached = true;
-									} else {
-										// at the time the transaction happened, the ACL was already patched
-										breached = false;
-									}
-								} else if (hasPublicRole || !hasRoles) {
-									breached = true;
-								}
-							}
-							
-							if (breached) {
-								break;
-							}
-						}
-					} else {
-						breached = defaultReadACLAllowsPublicRead;
-					}
-					
-					if (breached) {
-						analysisResult.breached.push({
+		const regex = /^[/]?api\/now\/sp\/widget\/(.*?)\?.*(?:t|table)=(.*?)(?:&|$)/;
+		const aclUtil = new global.SNCACLUtil();
+		const widgetSimpleListSysID = '5b255672cb03020000f8d856634c9c28';
+		for (let i = 0; i < transData.length; i++) {
+			const match = transData[i].url.match(regex);
+			if (match) {
+				const widget = match[1];
+				const table = match[2];
+				// special case 'widget-simple-list': since March 2023, there is a 'public-access' which prevents leaks!
+				if (widget == 'widget-simple-list' || widget == widgetSimpleListSysID) {
+					if (!aclUtil.hasPublicAccess(table)) {
+						// if the table is not 'public', the simple list widget hasn't returned any results
+						// and as such the current table isn't subjected to a data leak (at least not through this widget)
+						analysisResult.prevented.push({
 							widget: getWidgetSysId(widget),
 							table: table,
 							transaction: transData[i].sys_id,
-							reason: reason,
-							probability: breachedProbability
+							reason: 'protected by "widget-simple-list" hasPublicAccess',
+							attempt_date: transData[i].date
 						});
+						continue;
 					}
 				}
+
+				const breachedProbability = leakProbability(transData[i].size);
+				// 22-Oct-2023 MKR: Return all breaches (not only the most likely)
+// 				const tableBreachedIndex = affectedTables.breached.findIndex(x => x.widget == widget && x.table == table);
+// 				if (tableBreachedIndex != -1) {
+// 					// we only need the most severe breach
+// 					if (affectedTables.breached[tableBreachedIndex].prob >= breachedProbability) {
+// 						continue;
+// 					} else {
+// 						affectedTables.breached.splice(tableBreachedIndex, 1);
+// 					}
+// 				}
+
+				const aclGr = new GlideRecord('sys_security_acl');
+				aclGr.addQuery('type', 'record');
+				aclGr.addQuery('name', table);
+				aclGr.addQuery('operation', 'read');
+				aclGr.query();
+
+				let reason = 'public access possible';
+				let breached = false;
+				if (aclGr.hasNext()) {
+					while (aclGr.next()) {
+						const aclScript = aclGr.script.toString();
+						const hasPublicRole = this.aclHasRole(aclGr.sys_id, 'public');
+						const hasRoles = this.aclHasRoles(aclGr.sys_id);
+						if (!aclScript && (hasPublicRole || !hasRoles)) {
+							// still leaking!
+							breached = true;
+						} else {
+							if (aclScript.contains('glide.security.allow_unauth_roleless_acl')) {
+								// the ACL was patched by ServiceNow (most likely)
+								// this means that this ACL has (or had at the time of the patch) no valid role assigned,
+								// no condition and no script
+								if (aclGr.sys_upated_on > transData[i].date) {
+									// at the time the transaction happened, the ACL was most likely leaking
+									breached = true;
+								} else {
+									// at the time the transaction happened, the ACL was already patched
+									breached = false;
+								}
+							} else if (hasPublicRole || !hasRoles) {
+								breached = true;
+							}
+						}
+							
+						if (breached) {
+							break;
+						}
+					}
+				} else {
+					breached = defaultReadACLAllowsPublicRead;
+				}
+
+				if (breached) {
+					analysisResult.breached.push({
+						widget: getWidgetSysId(widget),
+						table: table,
+						transaction: transData[i].sys_id,
+						reason: reason,
+						probability: breachedProbability,
+						attempt_date: transData[i].date
+					});
+				}
 			}
-		} else {
-			gs.error('[DLA] No Script Injection possible!');
 		}
 		
 		return analysisResult;
@@ -276,13 +323,13 @@ DLAUtil.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 16:17:18</sys_created_on>
         <sys_id>7ac95274978671103c2d3f56f053af95</sys_id>
-        <sys_mod_count>36</sys_mod_count>
+        <sys_mod_count>43</sys_mod_count>
         <sys_name>DLAUtil</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_script_include_7ac95274978671103c2d3f56f053af95</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 08:15:18</sys_updated_on>
+        <sys_updated_on>2023-10-22 15:06:17</sys_updated_on>
     </sys_script_include>
 </record_update>

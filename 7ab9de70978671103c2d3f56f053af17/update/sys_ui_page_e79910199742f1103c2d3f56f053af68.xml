@@ -18,11 +18,20 @@
 	</g2:evaluate>
 	<script>
 		(function refreshReportTable() {
-			// as the page is reloaded after a click on "Analyse Widgets", the report table will
+			// as the page is reloaded after a click on "Analyse Leaks", the report table will
 			// be always "up-to-date"
 			var parentWindow = window.parent;
-			if (parentWindow) {
-				parentWindow.GlideList2.get(Object.keys(parentWindow.GlideLists2)[0]).refresh();
+			if (parentWindow $[AND] parentWindow.GlideLists2) {
+				for (var listID in parentWindow.GlideLists2) {
+					var list = parentWindow.GlideLists2[listID];
+					// On Dashboard-Tab-Switch, the a new GlideList Object is created, but the
+					// old Objects are not cleaned up.
+					// Refreshing the dead lists will result in a crash!
+					var domElementExists = !!parentWindow.document.getElementById(listID);
+					if (list.tableName == 'x_376096_dla_widget_result' $[AND] domElementExists) {
+						list.refresh();
+					}
+				}
 			}
 		})();
 	</script>
@@ -64,13 +73,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-21 17:26:55</sys_created_on>
         <sys_id>e79910199742f1103c2d3f56f053af68</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>analyse_widgets</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_ui_page_e79910199742f1103c2d3f56f053af68</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 07:47:05</sys_updated_on>
+        <sys_updated_on>2023-10-22 14:54:32</sys_updated_on>
     </sys_ui_page>
 </record_update>

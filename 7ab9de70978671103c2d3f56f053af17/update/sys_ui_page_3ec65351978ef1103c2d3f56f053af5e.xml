@@ -21,8 +21,17 @@
 			// as the page is reloaded after a click on "Analyse Leaks", the report table will
 			// be always "up-to-date"
 			var parentWindow = window.parent;
-			if (parentWindow) {
-				parentWindow.GlideList2.get(Object.keys(parentWindow.GlideLists2)[0]).refresh();
+			if (parentWindow $[AND] parentWindow.GlideLists2) {
+				for (var listID in parentWindow.GlideLists2) {
+					var list = parentWindow.GlideLists2[listID];
+					// On Dashboard-Tab-Switch, the a new GlideList Object is created, but the
+					// old Objects are not cleaned up.
+					// Refreshing the dead lists will result in a crash!
+					var domElementExists = !!parentWindow.document.getElementById(listID);
+					if (list.tableName == 'x_376096_dla_leak_result' $[AND] domElementExists) {
+						list.refresh();
+					}
+				}
 			}
 		})();
 	</script>
@@ -33,10 +42,12 @@
 	</g:ui_form>
 </j:jelly>]]></html>
         <name>analyse_leaks</name>
-        <processing_script><![CDATA[/* global x_376096_dla, GlideRecord */
+        <processing_script><![CDATA[/* global x_376096_dla, sn_pdfgeneratorutils, GlideRecord, GlideSysAttachment */
 /* eslint no-undef: "error" */
 (function () {
-	const analysis = new x_376096_dla.DLAUtil().analyseTransactions();
+	const dlaUtil = new x_376096_dla.DLAUtil();
+	const gsa = new GlideSysAttachment();
+	const analysis = dlaUtil.analyseTransactions();
 	analysis.prevented.forEach(prevented => {
 		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
 		leakResultGr.addQuery('transaction', prevented.transaction);
@@ -48,7 +59,7 @@
 				!leakResultGr.description.toString().includes(prevented.reason)) {
 				leakResultGr.widget = prevented.widget;
 				leakResultGr.table = prevented.table;
-				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak-Prevention: ' + prevented.reason;				
+				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak-Prevention: ' + prevented.reason;
 				leakResultGr.update();
 			}
 		} else {
@@ -58,7 +69,11 @@
 			leakResultGr.table = prevented.table;
 			leakResultGr.short_description = 'Data Leak prevented';
 			leakResultGr.description = 'This transaction has been identified as a "Prevented Potential Data Leak".\nReason: ' + prevented.reason + '\n\nPlease aknowledge by closing this task with a proper closure note.';
-			leakResultGr.insert();
+			leakResultGr.attempt_date = prevented.attempt_date;
+			const leakResultSysID = leakResultGr.insert();
+			
+			const transXML = dlaUtil.exportRecordXML('syslog_transaction', prevented.transaction);
+			gsa.write(leakResultGr, 'trans_' + prevented.transaction + '.xml', 'application/xml', transXML.toString());
 		}
 	});
 	
@@ -86,7 +101,11 @@
 			leakResultGr.probability = breached.probability;
 			leakResultGr.short_description = 'Potential Data Leak';
 			leakResultGr.description = 'This transaction has been identified as a "Potential Data Leak".\nReason: ' + breached.reason + '\n\nPlease examine the ACLs of the Table to identify what table might have leaked.';
+			leakResultGr.attempt_date = breached.attempt_date;
 			leakResultGr.insert();
+			
+			const transXML = dlaUtil.exportRecordXML('syslog_transaction', breached.transaction);
+			gsa.write(leakResultGr, 'trans_' + breached.transaction + '.xml', 'application/xml', transXML.toString());
 		}
 	});
 })();]]></processing_script>
@@ -94,13 +113,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-22 07:12:58</sys_created_on>
         <sys_id>3ec65351978ef1103c2d3f56f053af5e</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>analyse_leaks</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_ui_page_3ec65351978ef1103c2d3f56f053af5e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 08:13:14</sys_updated_on>
+        <sys_updated_on>2023-10-22 14:54:13</sys_updated_on>
     </sys_ui_page>
 </record_update>
