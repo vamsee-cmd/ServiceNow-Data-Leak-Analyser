@@ -16,7 +16,7 @@
         <notification_text/>
         <order/>
         <owner/>
-        <restrict_to_roles>pa_viewer,pa_contributor</restrict_to_roles>
+        <restrict_to_roles>admin</restrict_to_roles>
         <role_override>true</role_override>
         <roles/>
         <should_migrate_permissions>false</should_migrate_permissions>
@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>76836fb497ca71103c2d3f56f053af13</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Data Leak Analyser - Main Dashboard</sys_name>
         <sys_overrides/>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>pa_dashboards_76836fb497ca71103c2d3f56f053af13</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-20 18:53:08</sys_updated_on>
+        <sys_updated_on>2023-10-22 15:44:36</sys_updated_on>
         <users/>
         <visible_to>2</visible_to>
     </pa_dashboards>

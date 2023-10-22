@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report_mpivot_rule">
+    <sys_report_mpivot_rule action="DELETE">
+        <bg_color>background-color:</bg_color>
+        <bg_color_id/>
+        <color>background-color:#008000</color>
+        <color_id display_value="Green">65b302aea9fe3dba00a530d65ecc2106</color_id>
+        <operator>=</operator>
+        <order/>
+        <report_id display_value="Leaking Portal Widgets">69733f38970e71103c2d3f56f053af33</report_id>
+        <sys_class_name>sys_report_mpivot_rule</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 20:02:06</sys_created_on>
+        <sys_id>9a93b378970e71103c2d3f56f053afbf</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>=</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_report_mpivot_rule_9a93b378970e71103c2d3f56f053afbf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 20:02:06</sys_updated_on>
+        <value1>0</value1>
+        <value2/>
+    </sys_report_mpivot_rule>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</application>
+        <file_path/>
+        <instance_id>65348116dbf0fb04b847ac44d496196d</instance_id>
+        <instance_name>dev81254</instance_name>
+        <name>sys_report_mpivot_rule_9a93b378970e71103c2d3f56f053afbf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report_mpivot_rule"><sys_report_mpivot_rule action="INSERT_OR_UPDATE"><bg_color>background-color:</bg_color><bg_color_id/><color>background-color:#008000</color><color_id display_value="Green">65b302aea9fe3dba00a530d65ecc2106</color_id><operator>=</operator><order/><report_id display_value="Leaking Portal Widgets">69733f38970e71103c2d3f56f053af33</report_id><sys_class_name>sys_report_mpivot_rule</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 20:02:06</sys_created_on><sys_id>9a93b378970e71103c2d3f56f053afbf</sys_id><sys_mod_count>0</sys_mod_count><sys_name>=</sys_name><sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package><sys_policy/><sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope><sys_update_name>sys_report_mpivot_rule_9a93b378970e71103c2d3f56f053afbf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 20:02:06</sys_updated_on><value1>0</value1><value2/></sys_report_mpivot_rule></record_update>]]></payload>
+        <payload_hash>-1481447910</payload_hash>
+        <record_name>=</record_name>
+        <reverted_from/>
+        <source>3ab9de34978671103c2d3f56f053affb</source>
+        <source_table>sys_update_set</source_table>
+        <state>current</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 20:02:06</sys_created_on>
+        <sys_id>46a3b378970e71103c2d3f56f053afc6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b4eae49ca0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 20:02:06</sys_updated_on>
+        <type>Multilevel Pivot Rule</type>
+        <update_guid>8aa3b378790e7110918463cbafcb60c5</update_guid>
+        <update_guid_history>8aa3b378790e7110918463cbafcb60c5:-1481447910</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-21 19:32:35</sys_created_on>
+        <sys_db_object display_value="" name="sys_report_mpivot_rule">sys_report_mpivot_rule</sys_db_object>
+        <sys_id>4372302c3d8746058f88209498d9bfb9</sys_id>
+        <sys_metadata>9a93b378970e71103c2d3f56f053afbf</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>=</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_scope_delete display_value="">018d62d8d4c944a6803460baf46bd164</sys_scope_delete>
+        <sys_update_name>sys_report_mpivot_rule_9a93b378970e71103c2d3f56f053afbf</sys_update_name>
+        <sys_update_version display_value="sys_report_mpivot_rule_9a93b378970e71103c2d3f56f053afbf">46a3b378970e71103c2d3f56f053afc6</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-21 19:32:35</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
