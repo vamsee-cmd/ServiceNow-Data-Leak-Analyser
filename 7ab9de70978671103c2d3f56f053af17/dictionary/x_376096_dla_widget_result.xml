@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" db_object_id="0a86b81997c2f1103c2d3f56f053afac" extends="task" label="Widget Result" max_length="40" name="x_376096_dla_widget_result" type="collection">
+        <element label="Widget" max_length="32" name="widget" reference="sp_widget" type="reference"/>
+    </element>
+</database>

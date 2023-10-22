@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_376096_dla_analyse_leaks.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g2:evaluate>
+		let buttonLabel = 'Analyse Data Leaks';
+		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
+		leakResultGr.setLimit(1);
+		leakResultGr.query();
+		if (leakResultGr.hasNext()) {
+			buttonLabel = 'Re-Analyse Leaks';
+		}
+	</g2:evaluate>
+	<script>
+		(function refreshReportTable() {
+			// as the page is reloaded after a click on "Analyse Leaks", the report table will
+			// be always "up-to-date"
+			var parentWindow = window.parent;
+			if (parentWindow) {
+				parentWindow.GlideList2.get(Object.keys(parentWindow.GlideLists2)[0]).refresh();
+			}
+		})();
+	</script>
+	<g:ui_form>
+		<button class="action button" type="submit" onclick="this.disabled=true; this.form.submit();">
+			$[buttonLabel]
+		</button>
+	</g:ui_form>
+</j:jelly>]]></html>
+        <name>analyse_leaks</name>
+        <processing_script><![CDATA[/* global x_376096_dla, GlideRecord */
+/* eslint no-undef: "error" */
+(function () {
+	const analysis = new x_376096_dla.DLAUtil().analyseTransactions();
+	analysis.prevented.forEach(prevented => {
+		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
+		leakResultGr.addQuery('transaction', prevented.transaction);
+		leakResultGr.setLimit(1);
+		leakResultGr.query();
+		if (leakResultGr.next()) {
+			if (leakResultGr.widget != prevented.widget ||
+				leakResultGr.table != prevented.table ||
+				!leakResultGr.description.toString().includes(prevented.reason)) {
+				leakResultGr.widget = prevented.widget;
+				leakResultGr.table = prevented.table;
+				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak-Prevention: ' + prevented.reason;				
+				leakResultGr.update();
+			}
+		} else {
+			leakResultGr.newRecord();
+			leakResultGr.transaction = prevented.transaction;
+			leakResultGr.widget = prevented.widget;
+			leakResultGr.table = prevented.table;
+			leakResultGr.short_description = 'Data Leak prevented';
+			leakResultGr.description = 'This transaction has been identified as a "Prevented Potential Data Leak".\nReason: ' + prevented.reason + '\n\nPlease aknowledge by closing this task with a proper closure note.';
+			leakResultGr.insert();
+		}
+	});
+	
+	analysis.breached.forEach(breached => {
+		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
+		leakResultGr.addQuery('transaction', breached.transaction);
+		leakResultGr.setLimit(1);
+		leakResultGr.query();
+		if (leakResultGr.next()) {
+			if (leakResultGr.widget != breached.widget ||
+				leakResultGr.table != breached.table ||
+				leakResultGr.probability != breached.probability ||
+				!leakResultGr.description.toString().includes(breached.reason)) {
+				leakResultGr.widget = breached.widget;
+				leakResultGr.table = breached.table;
+				leakResultGr.probability = breached.probability;
+				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak: ' + breached.reason;				
+				leakResultGr.update();
+			}
+		} else {
+			leakResultGr.newRecord();
+			leakResultGr.transaction = breached.transaction;
+			leakResultGr.widget = breached.widget;
+			leakResultGr.table = breached.table;
+			leakResultGr.probability = breached.probability;
+			leakResultGr.short_description = 'Potential Data Leak';
+			leakResultGr.description = 'This transaction has been identified as a "Potential Data Leak".\nReason: ' + breached.reason + '\n\nPlease examine the ACLs of the Table to identify what table might have leaked.';
+			leakResultGr.insert();
+		}
+	});
+})();]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-22 07:12:58</sys_created_on>
+        <sys_id>3ec65351978ef1103c2d3f56f053af5e</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>analyse_leaks</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_ui_page_3ec65351978ef1103c2d3f56f053af5e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-22 08:13:14</sys_updated_on>
+    </sys_ui_page>
+</record_update>

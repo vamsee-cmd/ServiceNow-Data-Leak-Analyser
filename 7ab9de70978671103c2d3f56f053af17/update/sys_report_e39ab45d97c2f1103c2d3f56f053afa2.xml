@@ -26,7 +26,7 @@
         <chart_title_x_position>0</chart_title_x_position>
         <chart_title_y_position>0</chart_title_y_position>
         <chart_width>600</chart_width>
-        <color/>
+        <color display_value="Default Color">de699435d7033100b4964ebfae610331</color>
         <color_palette display_value="Default UI14">aa558ab3d7732100fa6c0c12ce610377</color_palette>
         <colors/>
         <column/>
@@ -46,7 +46,7 @@
         <end_time/>
         <exp_report_attrs>true</exp_report_attrs>
         <field/>
-        <field_list>number,short_description,state,table,widget,probability,assigned_to,sys_updated_on</field_list>
+        <field_list>number,short_description,state,widget,sys_updated_on</field_list>
         <filter/>
         <formatting_configuration>{"table":"incident","stringFormattingProperties":{},"durationFormattingProperties":{},"dateFormattingProperties":{},"numberFormattingProperties":{}}</formatting_configuration>
         <from/>
@@ -104,18 +104,18 @@
         <sumfield/>
         <sys_class_name>sys_report</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2023-10-20 22:16:02</sys_created_on>
-        <sys_id>4052900197ce71103c2d3f56f053afbf</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_name>Data Extraction Attempts</sys_name>
+        <sys_created_on>2023-10-21 19:50:38</sys_created_on>
+        <sys_id>e39ab45d97c2f1103c2d3f56f053afa2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Leaking Portal Widgets</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
-        <sys_update_name>sys_report_4052900197ce71103c2d3f56f053afbf</sys_update_name>
+        <sys_update_name>sys_report_e39ab45d97c2f1103c2d3f56f053afa2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 08:07:53</sys_updated_on>
-        <table>x_376096_dla_leak_result</table>
-        <title>Data Extraction Attempts</title>
+        <sys_updated_on>2023-10-21 19:50:38</sys_updated_on>
+        <table>x_376096_dla_widget_result</table>
+        <title>Leaking Portal Widgets</title>
         <title_horizontal_alignment>center</title_horizontal_alignment>
         <title_vertical_alignment>top</title_vertical_alignment>
         <to/>

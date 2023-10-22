@@ -7,21 +7,22 @@
         <frame/>
         <logged_on>false</logged_on>
         <name>Leaking Service Portal Widget Remediation</name>
-        <static_content><![CDATA[<p>Please take a good look on the widgets returned by the above report and make sure carefully answer the following questsions:</p>
-<ul style="list-style-position: inside;"><li>Is there a good reason for the Widget to be public?</li><li>Does the Widget accept dynamic input, e.g. $sp.getParameter?</li><li>Does the Widget contain any mechanic (Server script) that loops over a table?</li><li>Does the Widget loop over table that is input-dependend?</li></ul>
-<p>If you answer several of those questions with &#39;yes&#39;, then you have a good chance that the widget might leak data to an attacker.</p>]]></static_content>
+        <static_content><![CDATA[<p>Please take a good look at the widget(s) and answer the following questions:</p>
+<ul style="list-style-position: inside;"><li>Is there a good reason for the Widget to be public?</li><li>Does the Widget accept dynamic input, e.g. via $sp.getParameter?</li><li>Does the Widget expose data to the caller?</li><li>Does the Widget loop over a records of a table and expose data to the caller?</li><li>Does the Widget access a table dynamically (e.g. input-dependent)?</li></ul>
+<p>If you answer several of those questions with &#39;yes&#39; or &#39;maybe&#39;, then you have a good chance that the widget might leak data to an attacker and you should set the Widget to &#39;Public &#61; false&#39;.</p>
+<p>ServiceNow Resources:<br /><a href="https://support.servicenow.com/kb?id&#61;kb_article_view&amp;sysparm_article&#61;KB1553688" target="_blank" rel="nofollow noopener noreferrer">KB1553688 ➚</a> (General Information | Potential Public List Widget Misconfiguration)</p>]]></static_content>
         <sys_class_name>content_block_static</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 20:09:36</sys_created_on>
         <sys_id>f1d3f778970e71103c2d3f56f053af5d</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>Leaking Service Portal Widget Remediation</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>content_block_static_f1d3f778970e71103c2d3f56f053af5d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-20 20:09:36</sys_updated_on>
+        <sys_updated_on>2023-10-21 20:50:44</sys_updated_on>
     </content_block_static>
     <sys_translated_text action="delete_multiple" query="documentkey=f1d3f778970e71103c2d3f56f053af5d"/>
 </record_update>

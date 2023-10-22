@@ -9,21 +9,24 @@
         <name>ACL Hardening</name>
         <static_content><![CDATA[<p>Please make sure that the following is true for all ACLs:</p>
 <ul style="list-style-position: inside;"><li>A fitting role is added (&#34;Required roles&#34;)</li><li>If adding a role is not possible and no Script is present, set the ACL to &#34;Advanced &#61; true&#34; and add the following script:<br />
-<pre>gs.getSession().isLoggedIn() || gs.getProperty(&#39;glide.security.allow_unauth_roleless_acl&#39;, false) &#61;&#61; &#39;true&#39;</pre>
+<pre style="width: 640px;">answer &#61; gs.getSession().isLoggedIn();
+if (!answer) {
+    answer &#61; gs.getProperty(&#39;glide.security.allow_unauth_roleless_acl&#39;, false);
+}</pre>
 </li></ul>
-<p>See the following Knowledge Article:<br /><a href="https://support.servicenow.com/kb?id&#61;kb_article_view&amp;sysparm_article&#61;KB1555339" target="_blank" rel="nofollow noopener noreferrer">https://support.servicenow.com/kb?id&#61;kb_article_view&amp;sysparm_article&#61;KB1555339</a><span> </span>​</p>]]></static_content>
+<p>See the following Knowledge Article:<br /><a href="https://support.servicenow.com/kb?id&#61;kb_article_view&amp;sysparm_article&#61;KB1555339" target="_blank" rel="nofollow noopener noreferrer">KB1555339 ➚</a> ​(ACL Maintenance)<br /><a href="https://support.servicenow.com/kb?id&#61;kb_article_view&amp;sysparm_article&#61;KB1555340" target="_blank" rel="nofollow noopener noreferrer">KB1555340 ➚</a> (Self Hosted ACL Maintenance)</p>]]></static_content>
         <sys_class_name>content_block_static</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 22:23:00</sys_created_on>
         <sys_id>db72980197ce71103c2d3f56f053afe0</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>ACL Hardening</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>content_block_static_db72980197ce71103c2d3f56f053afe0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-20 22:23:00</sys_updated_on>
+        <sys_updated_on>2023-10-22 08:09:13</sys_updated_on>
     </content_block_static>
     <sys_translated_text action="delete_multiple" query="documentkey=db72980197ce71103c2d3f56f053afe0"/>
 </record_update>

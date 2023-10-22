@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="probability" label="Probability [%]" language="en" table="x_376096_dla_leak_result">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>probability</element>
+            <help/>
+            <hint/>
+            <label>Probability [%]</label>
+            <language>en</language>
+            <name>x_376096_dla_leak_result</name>
+            <plural>Probability [%]s</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-21 21:21:13</sys_created_on>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Probability [%]</sys_name>
+            <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+            <sys_update_name>sys_documentation_x_376096_dla_leak_result_probability_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-22 08:07:01</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

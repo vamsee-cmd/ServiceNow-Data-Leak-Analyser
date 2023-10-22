@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list action="DELETE" parent="" relationship="" sys_domain="global" table="x_376096_dla_st_pot_data_leak" version="2" view="RPT4052900197ce71103c2d3f56f053afbf">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>table</element>
+            <list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_id>c452940197ce71103c2d3f56f053af3a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>probability</element>
+            <list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_id>c852940197ce71103c2d3f56f053af3a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>widget</element>
+            <list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_id>cc52940197ce71103c2d3f56f053af3a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>transaction</element>
+            <list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_id>c052940197ce71103c2d3f56f053af3b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>notes</element>
+            <list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_id>c452940197ce71103c2d3f56f053af3b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_376096_dla_st_pot_data_leak</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c852940197ce71103c2d3f56f053af39</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_376096_dla_st_pot_data_leak</sys_name>
+            <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+            <sys_update_name>sys_ui_list_x_376096_dla_st_pot_data_leak_RPT4052900197ce71103c2d3f56f053afbf</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+            <sys_user/>
+            <view display_value="Rpt4052900197ce71103c2d3f56f053afbf" name="RPT4052900197ce71103c2d3f56f053afbf">0852940197ce71103c2d3f56f053af38</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</application>
+        <file_path/>
+        <instance_id>65348116dbf0fb04b847ac44d496196d</instance_id>
+        <instance_name>dev81254</instance_name>
+        <name>sys_ui_list_x_376096_dla_st_pot_data_leak_RPT4052900197ce71103c2d3f56f053afbf</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_list parent="" relationship="" sys_domain="global" table="x_376096_dla_st_pot_data_leak" version="2" view="RPT4052900197ce71103c2d3f56f053afbf"><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>table</element><list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id><max_value>false</max_value><min_value>false</min_value><position>0</position><sum>false</sum><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_id>c452940197ce71103c2d3f56f053af3a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>probability</element><list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id><max_value>false</max_value><min_value>false</min_value><position>1</position><sum>false</sum><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_id>c852940197ce71103c2d3f56f053af3a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>widget</element><list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id><max_value>false</max_value><min_value>false</min_value><position>2</position><sum>false</sum><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_id>cc52940197ce71103c2d3f56f053af3a</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>transaction</element><list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id><max_value>false</max_value><min_value>false</min_value><position>3</position><sum>false</sum><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_id>c052940197ce71103c2d3f56f053af3b</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on></sys_ui_list_element><sys_ui_list_element action="INSERT_OR_UPDATE"><average_value>false</average_value><element>notes</element><list_id display_value="x_376096_dla_st_pot_data_leak" element="NULL" name="x_376096_dla_st_pot_data_leak" parent="NULL" relationship="NULL" sys_domain="global" view="0852940197ce71103c2d3f56f053af38">c852940197ce71103c2d3f56f053af39</list_id><max_value>false</max_value><min_value>false</min_value><position>4</position><sum>false</sum><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_id>c452940197ce71103c2d3f56f053af3b</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on></sys_ui_list_element><sys_ui_list action="INSERT_OR_UPDATE"><average_value>false</average_value><element/><max_value>false</max_value><min_value>false</min_value><name>x_376096_dla_st_pot_data_leak</name><parent/><position/><relationship/><sum>false</sum><sys_class_name>sys_ui_list</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-20 22:16:03</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>c852940197ce71103c2d3f56f053af39</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_376096_dla_st_pot_data_leak</sys_name><sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package><sys_policy/><sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope><sys_update_name>sys_ui_list_x_376096_dla_st_pot_data_leak_RPT4052900197ce71103c2d3f56f053afbf</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-20 22:16:03</sys_updated_on><sys_user/><view display_value="Rpt4052900197ce71103c2d3f56f053afbf" name="RPT4052900197ce71103c2d3f56f053afbf">0852940197ce71103c2d3f56f053af38</view><view_name/></sys_ui_list></sys_ui_list></record_update>]]></payload>
+        <payload_hash>-423373564</payload_hash>
+        <record_name>Potential Data Leak</record_name>
+        <reverted_from/>
+        <source>3ab9de34978671103c2d3f56f053affb</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-20 22:16:03</sys_created_on>
+        <sys_id>4852940197ce71103c2d3f56f053af3d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b4f28e91d0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-20 22:16:03</sys_updated_on>
+        <type>List Layout</type>
+        <update_guid>cc529401cace7110ba47efb23b50253c</update_guid>
+        <update_guid_history>cc529401cace7110ba47efb23b50253c:-423373564</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-22 08:10:30</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_list">sys_ui_list</sys_db_object>
+        <sys_id>00862ab18b1643d0a81b7ac0ec570100</sys_id>
+        <sys_metadata>c852940197ce71103c2d3f56f053af39</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_376096_dla_st_pot_data_leak</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_parent display_value="">f79d8c89978e71103c2d3f56f053af9e</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_scope_delete display_value="">018d62d8d4c944a6803460baf46bd164</sys_scope_delete>
+        <sys_update_name>sys_ui_list_x_376096_dla_st_pot_data_leak_RPT4052900197ce71103c2d3f56f053afbf</sys_update_name>
+        <sys_update_version display_value="sys_ui_list_x_376096_dla_st_pot_data_leak_RPT4052900197ce71103c2d3f56f053afbf">4852940197ce71103c2d3f56f053af3d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-22 08:10:30</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
