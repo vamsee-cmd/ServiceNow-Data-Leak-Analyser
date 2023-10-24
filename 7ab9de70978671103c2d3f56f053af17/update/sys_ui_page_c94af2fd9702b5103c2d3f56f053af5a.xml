@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>true</direct>
+        <endpoint>x_376096_dla_analyse_acls.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_refresh" expression="RP.getParameterValue('refresh')" />
+	<j:if test="${!empty(jvar_refresh)}">
+		<script>
+			(function refreshReportTable() {
+				// as the page is reloaded after a click on "Analyse ACLs", the report table will
+				// be always "up-to-date"
+				var parentWindow = window.parent;
+				if (parentWindow $[AND] parentWindow.GlideLists2) {
+					for (var listID in parentWindow.GlideLists2) {
+						var list = parentWindow.GlideLists2[listID];
+						// On Dashboard-Tab-Switch, the a new GlideList Object is created, but the
+						// old Objects are not cleaned up.
+						// Refreshing the dead lists will result in a crash!
+						var domElementExists = !!parentWindow.document.getElementById(listID);
+						if (list.tableName == 'x_376096_dla_acl_result' $[AND] domElementExists) {
+							list.refresh();
+						}
+					}
+				}
+			})();
+		</script>
+	</j:if>
+	<g2:evaluate>
+		let runACLAnalysis = false;
+		let buttonLabel = 'Analyse ACLs';
+		const aclResultGr = new GlideRecord('x_376096_dla_acl_result');
+		aclResultGr.setLimit(1);
+		aclResultGr.query();
+		if (aclResultGr.hasNext()) {
+			buttonLabel = 'Re-Analyse ACLs';
+		} else {
+			// if there are no ACL results, always run the analysis
+			runACLAnalysis = true;
+		}
+	</g2:evaluate>
+	<g:ui_form>
+		<button class="action button" type="submit" onclick="this.disabled=true; this.form.submit();">
+			$[buttonLabel]
+		</button>
+	</g:ui_form>
+	<j2:if test="$[runACLAnalysis]">
+		<script>
+			(function () {
+				document.querySelector('#form\\.c94af2fd9702b5103c2d3f56f053af5a button').click();
+			})();
+		</script>
+	</j2:if>
+</j:jelly>]]></html>
+        <name>analyse_acls</name>
+        <processing_script><![CDATA[/* global x_376096_dla, sn_pdfgeneratorutils, GlideRecord, GlideSysAttachment */
+/* global request, response */
+/* eslint no-undef: "error" */
+(function (request, response) {
+	// request [GlideServletRequest]
+	// https://developer.servicenow.com/dev.do#!/reference/api/sandiego/server/no-namespace/c_GlideServletRequestScopedAPI
+	
+	// response [GlideServletResponse]
+	// https://developer.servicenow.com/dev.do#!/reference/api/sandiego/server/no-namespace/c_GlideServletResponseScopedAPI
+	
+	// this
+	// [represents the values from the <g:ui_form>]
+	const dlaUtil = new x_376096_dla.DLAUtil();
+	const analysis = dlaUtil.analyseACLs();	
+	
+	const aclSysIDs = [];
+	analysis.forEach(acl => {
+		aclSysIDs.push(acl.sys_id);
+		const aclResultGr = new GlideRecord('x_376096_dla_acl_result');
+		aclResultGr.addQuery('acl', acl.sys_id);
+		aclResultGr.setLimit(1);
+		aclResultGr.query();
+		if (!aclResultGr.hasNext()) {
+			aclResultGr.newRecord();
+			aclResultGr.acl = acl.sys_id;
+			aclResultGr.short_description = 'ACL potentially enabling public access';
+			aclResultGr.description = 'This ACL has been identified as "Potentially Enabling Public Access".\nReason: ' + acl.reason + '\n\nPlease examine if the ACL serves this purpose by design. If not take the necessary steps to protect the instance from unauthorized access.';
+			aclResultGr.insert();
+		}
+	});
+	
+	const aclResultGr = new GlideRecord('x_376096_dla_acl_result');
+	aclResultGr.addQuery('active', true);
+	aclResultGr.addQuery('acl', 'NOT IN', aclSysIDs);
+	aclResultGr.setValue('state', 3); // closed complete
+	aclResultGr.setValue('work_notes', 'Task has been closed as the affected ACL is no longer included in the latest ACL analysis.');
+	aclResultGr.updateMultiple();
+	
+	response.sendRedirect('x_376096_dla_analyse_acls.do?refresh=true');
+}).call(this, request, response);]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-23 18:29:29</sys_created_on>
+        <sys_id>c94af2fd9702b5103c2d3f56f053af5a</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>analyse_acls</sys_name>
+        <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
+        <sys_update_name>sys_ui_page_c94af2fd9702b5103c2d3f56f053af5a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-24 18:46:04</sys_updated_on>
+    </sys_ui_page>
+</record_update>

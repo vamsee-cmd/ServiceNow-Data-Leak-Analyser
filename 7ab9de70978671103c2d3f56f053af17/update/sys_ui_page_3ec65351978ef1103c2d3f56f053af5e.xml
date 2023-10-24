@@ -7,59 +7,94 @@
         <endpoint>x_376096_dla_analyse_leaks.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_refresh" expression="RP.getParameterValue('refresh')" />
+	<j:if test="${!empty(jvar_refresh)}">
+		<script>
+			(function refreshReportTable() {
+				// as the page is reloaded after a click on "Analyse ACLs", the report table will
+				// be always "up-to-date"
+				var parentWindow = window.parent;
+				if (parentWindow $[AND] parentWindow.GlideLists2) {
+					for (var listID in parentWindow.GlideLists2) {
+						var list = parentWindow.GlideLists2[listID];
+						// On Dashboard-Tab-Switch, the a new GlideList Object is created, but the
+						// old Objects are not cleaned up.
+						// Refreshing the dead lists will result in a crash!
+						var domElementExists = !!parentWindow.document.getElementById(listID);
+						if (list.tableName == 'x_376096_dla_leak_result' $[AND] domElementExists) {
+							list.refresh();
+						}
+					}
+				}
+			})();
+		</script>
+	</j:if>
 	<g2:evaluate>
+		let runLeakAnalysis = false;
 		let buttonLabel = 'Analyse Data Leaks';
 		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
 		leakResultGr.setLimit(1);
 		leakResultGr.query();
 		if (leakResultGr.hasNext()) {
 			buttonLabel = 'Re-Analyse Leaks';
+		} else {
+			runLeakAnalysis = true;
 		}
 	</g2:evaluate>
-	<script>
-		(function refreshReportTable() {
-			// as the page is reloaded after a click on "Analyse Leaks", the report table will
-			// be always "up-to-date"
-			var parentWindow = window.parent;
-			if (parentWindow $[AND] parentWindow.GlideLists2) {
-				for (var listID in parentWindow.GlideLists2) {
-					var list = parentWindow.GlideLists2[listID];
-					// On Dashboard-Tab-Switch, the a new GlideList Object is created, but the
-					// old Objects are not cleaned up.
-					// Refreshing the dead lists will result in a crash!
-					var domElementExists = !!parentWindow.document.getElementById(listID);
-					if (list.tableName == 'x_376096_dla_leak_result' $[AND] domElementExists) {
-						list.refresh();
-					}
-				}
-			}
-		})();
-	</script>
 	<g:ui_form>
 		<button class="action button" type="submit" onclick="this.disabled=true; this.form.submit();">
 			$[buttonLabel]
 		</button>
 	</g:ui_form>
+	<j2:if test="$[runLeakAnalysis]">
+		<script>
+			(function () {
+				document.querySelector('#form\\.3ec65351978ef1103c2d3f56f053af5e button').click();
+			})();
+		</script>
+	</j2:if>
 </j:jelly>]]></html>
         <name>analyse_leaks</name>
-        <processing_script><![CDATA[/* global x_376096_dla, sn_pdfgeneratorutils, GlideRecord, GlideSysAttachment */
+        <processing_script><![CDATA[/* global x_376096_dla, GlideRecord, GlideSysAttachment */
+/* global request, response */
 /* eslint no-undef: "error" */
-(function () {
+(function (request, response) {
+	// request [GlideServletRequest]
+	// https://developer.servicenow.com/dev.do#!/reference/api/sandiego/server/no-namespace/c_GlideServletRequestScopedAPI
+	
+	// response [GlideServletResponse]
+	// https://developer.servicenow.com/dev.do#!/reference/api/sandiego/server/no-namespace/c_GlideServletResponseScopedAPI
+	
+	// this
+	// [represents the values from the <g:ui_form>]
 	const dlaUtil = new x_376096_dla.DLAUtil();
 	const gsa = new GlideSysAttachment();
 	const analysis = dlaUtil.analyseTransactions();
+	
+	const transactions = [];
 	analysis.prevented.forEach(prevented => {
+		transactions.push(prevented.transaction);
+		
 		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
 		leakResultGr.addQuery('transaction', prevented.transaction);
 		leakResultGr.setLimit(1);
 		leakResultGr.query();
 		if (leakResultGr.next()) {
+			const leakResultDescription = leakResultGr.description.toString();
 			if (leakResultGr.widget != prevented.widget ||
 				leakResultGr.table != prevented.table ||
-				!leakResultGr.description.toString().includes(prevented.reason)) {
+				leakResultGr.leak_size != prevented.leak_size ||
+				leakResultGr.attempt_date != prevented.attempt_date ||
+				!leakResultDescription.includes(prevented.reason)) {
 				leakResultGr.widget = prevented.widget;
+				leakResultGr.leak_size = prevented.leak_size;
 				leakResultGr.table = prevented.table;
-				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak-Prevention: ' + prevented.reason;
+				leakResultGr.attempt_date = prevented.attempt_date;
+				
+				if (!leakResultDescription.includes(prevented.reason)) {
+					leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak-Prevention: ' + prevented.reason;
+				}
+				
 				leakResultGr.update();
 			}
 		} else {
@@ -67,9 +102,9 @@
 			leakResultGr.transaction = prevented.transaction;
 			leakResultGr.widget = prevented.widget;
 			leakResultGr.table = prevented.table;
+			leakResultGr.attempt_date = prevented.attempt_date;
 			leakResultGr.short_description = 'Data Leak prevented';
 			leakResultGr.description = 'This transaction has been identified as a "Prevented Potential Data Leak".\nReason: ' + prevented.reason + '\n\nPlease aknowledge by closing this task with a proper closure note.';
-			leakResultGr.attempt_date = prevented.attempt_date;
 			const leakResultSysID = leakResultGr.insert();
 			
 			const transXML = dlaUtil.exportRecordXML('syslog_transaction', prevented.transaction);
@@ -78,19 +113,28 @@
 	});
 	
 	analysis.breached.forEach(breached => {
+		transactions.push(breached.transaction);
+		
 		const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
 		leakResultGr.addQuery('transaction', breached.transaction);
 		leakResultGr.setLimit(1);
 		leakResultGr.query();
 		if (leakResultGr.next()) {
+			const leakResultDescription = leakResultGr.description.toString();
 			if (leakResultGr.widget != breached.widget ||
 				leakResultGr.table != breached.table ||
-				leakResultGr.probability != breached.probability ||
-				!leakResultGr.description.toString().includes(breached.reason)) {
+				leakResultGr.leak_size != breached.leak_size ||
+				leakResultGr.attempt_date != breached.attempt_date ||
+				!leakResultDescription.includes(breached.reason)) {
 				leakResultGr.widget = breached.widget;
 				leakResultGr.table = breached.table;
-				leakResultGr.probability = breached.probability;
-				leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak: ' + breached.reason;				
+				leakResultGr.leak_size = breached.leak_size;
+				leakResultGr.attempt_date = breached.attempt_date;
+				
+				if (!leakResultDescription.includes(breached.reason)) {
+					leakResultGr.work_notes += 'Updated Analysis:\nReason for Data-Leak: ' + breached.reason;
+				}
+				
 				leakResultGr.update();
 			}
 		} else {
@@ -98,28 +142,37 @@
 			leakResultGr.transaction = breached.transaction;
 			leakResultGr.widget = breached.widget;
 			leakResultGr.table = breached.table;
-			leakResultGr.probability = breached.probability;
+			leakResultGr.attempt_date = breached.attempt_date;
+			leakResultGr.leak_result = breached.leak_result;
 			leakResultGr.short_description = 'Potential Data Leak';
 			leakResultGr.description = 'This transaction has been identified as a "Potential Data Leak".\nReason: ' + breached.reason + '\n\nPlease examine the ACLs of the Table to identify what table might have leaked.';
-			leakResultGr.attempt_date = breached.attempt_date;
 			leakResultGr.insert();
 			
 			const transXML = dlaUtil.exportRecordXML('syslog_transaction', breached.transaction);
 			gsa.write(leakResultGr, 'trans_' + breached.transaction + '.xml', 'application/xml', transXML.toString());
 		}
 	});
-})();]]></processing_script>
+	
+	const leakResultGr = new GlideRecord('x_376096_dla_leak_result');
+	leakResultGr.addQuery('active', true);
+	leakResultGr.addQuery('transaction', 'NOT IN', transactions);
+	leakResultGr.setValue('state', 3); // closed complete
+	leakResultGr.setValue('work_notes', 'Task has been closed as the affected Leak is no longer included in the latest Leak analysis.');
+	leakResultGr.updateMultiple();
+	
+	response.sendRedirect('x_376096_dla_analyse_leaks.do?refresh=true');
+}).call(this, request, response);]]></processing_script>
         <sys_class_name>sys_ui_page</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-22 07:12:58</sys_created_on>
         <sys_id>3ec65351978ef1103c2d3f56f053af5e</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>analyse_leaks</sys_name>
         <sys_package display_value="Data Leak Analyser" source="x_376096_dla">7ab9de70978671103c2d3f56f053af17</sys_package>
         <sys_policy/>
         <sys_scope display_value="Data Leak Analyser">7ab9de70978671103c2d3f56f053af17</sys_scope>
         <sys_update_name>sys_ui_page_3ec65351978ef1103c2d3f56f053af5e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-10-22 14:54:13</sys_updated_on>
+        <sys_updated_on>2023-10-24 19:03:26</sys_updated_on>
     </sys_ui_page>
 </record_update>

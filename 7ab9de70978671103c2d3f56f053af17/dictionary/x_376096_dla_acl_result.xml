@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" db_object_id="6797367d9702b5103c2d3f56f053affa" extends="task" label="ACL Result" max_length="40" name="x_376096_dla_acl_result" type="collection">
+        <element label="ACL" max_length="32" name="acl" reference="sys_security_acl" type="reference"/>
+    </element>
+</database>

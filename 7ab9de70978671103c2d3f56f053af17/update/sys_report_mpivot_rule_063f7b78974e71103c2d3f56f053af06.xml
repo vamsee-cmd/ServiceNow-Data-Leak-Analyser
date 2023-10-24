@@ -6,7 +6,7 @@
         <color_id display_value="Green">65b302aea9fe3dba00a530d65ecc2106</color_id>
         <operator>=</operator>
         <order/>
-        <report_id display_value="Potentially misconfigured ACLs">b10f3738974e71103c2d3f56f053af5f</report_id>
+        <report_id display_value="ACLs allowing public access">b10f3738974e71103c2d3f56f053af5f</report_id>
         <sys_class_name>sys_report_mpivot_rule</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 20:52:46</sys_created_on>

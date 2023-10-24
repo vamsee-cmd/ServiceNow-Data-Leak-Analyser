@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_report_users_groups">
     <sys_report_users_groups action="INSERT_OR_UPDATE">
         <group_id/>
-        <report_id display_value="Potentially misconfigured ACLs">b10f3738974e71103c2d3f56f053af5f</report_id>
+        <report_id display_value="ACLs allowing public access">b10f3738974e71103c2d3f56f053af5f</report_id>
         <sys_class_name>sys_report_users_groups</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-10-20 20:51:47</sys_created_on>
